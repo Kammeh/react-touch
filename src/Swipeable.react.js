@@ -55,14 +55,9 @@ class Swipeable extends React.Component {
   handleTouchMove(touchPosition) {
     this.setState(merge({}, this.state, { current: touchPosition }));
 
-    DIRECTIONS.forEach(direction => {
-      const name = `onSwipe${direction}`;
-      const handler = this.props[name];
-      if (handler && !this._handlerFired[name]) {
-        this.props.config[name](touchPosition, this.state.initial, () => {
-          this._handlerFired[name] = true;
-          handler();
-        });
+    this.props.config.determineSwipe(touchPosition, this.state.initial, this.props, () => {
+      if(this.props.config.updateEvery == 0) {
+        this._handlerFired[name] = true;
       }
     });
   }
@@ -74,6 +69,7 @@ class Swipeable extends React.Component {
   _resetState() {
     this._touchHandler.cancelAnimationFrame();
     this._handlerFired = {};
+    this.props.config.reset();
     this.setState(merge({}, this.state, DEFAULT_STATE));
   }
 
