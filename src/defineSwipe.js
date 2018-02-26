@@ -36,24 +36,17 @@ const defineSwipe = (config={}) => {
       }
     },
     onSwipeUp: (current, initial, callback) => {
-      console.log(3);
-      console.log(updateEvery);
-      console.log(swipeDistance);
-      console.log(curr);
-      console.log(init);
       if(updateEvery > 0) {
         if (-(curr.y - init.y) / updateEvery > eventsTriggered) {
           eventsTriggered++;
           callback();
         }
       } else if (-(curr.y - init.y) >= swipeDistance) {
-        console.log(4);
         reached = true;
         callback();
       }
     },
     onSwipeDown: (current, initial, callback) => {
-      console.log(reached);
       if(updateEvery > 0) {
         if ((curr.y - init.y) / updateEvery > eventsTriggered) {
           eventsTriggered++;
