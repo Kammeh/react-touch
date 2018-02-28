@@ -79,19 +79,20 @@ const defineSwipe = (config={}) => {
         if(!init) {
           init = initial;
         }
-        if(current.x < previous.x) {
+        console.log(props)
+        if(current.x < previous.x && props.onSwipeLeft) {
           direction.curr = 'left';
           updatePrevious('x');
           funcs.onSwipeLeft(current, initial, props.onSwipeLeft);
-        } else if(current.x > previous.x) {
+        } else if(current.x > previous.x && props.onSwipeRight) {
           direction.curr = 'right';
           updatePrevious('x');
           funcs.onSwipeRight(current, initial, props.onSwipeRight);
-        } else if(current.y > previous.y) {
+        } else if(current.y > previous.y && props.onSwipeDown) {
           direction.curr = 'down';
           updatePrevious('y');
           funcs.onSwipeDown(current, initial, props.onSwipeDown);
-        } else if(current.y < previous.y) {
+        } else if(current.y < previous.y && props.onSwipeUp) {
           direction.curr = 'up';
           updatePrevious('y');
           funcs.onSwipeUp(current, initial, props.onSwipeUp);
