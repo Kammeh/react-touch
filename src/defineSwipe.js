@@ -78,8 +78,8 @@ const defineSwipe = (config={}) => {
         curr = current;
         if(!init) {
           init = initial;
+          previous = initial;
         }
-        console.log(props)
         if(current.x < previous.x && props.onSwipeLeft) {
           direction.curr = 'left';
           updatePrevious('x');
