@@ -21,7 +21,15 @@ class Swipeable extends React.Component {
   };
 
   static get defaultProps() {
-    return { config: defineSwipe() };
+    return {
+      config: defineSwipe(),
+      touchStart: () => {
+        return false
+      },
+      touchEnd: () => {
+        return false
+      }
+    };
   }
 
   constructor(props) {
@@ -50,6 +58,7 @@ class Swipeable extends React.Component {
       initial: touchPosition,
       current: touchPosition,
     }));
+    this.props.touchStart();
   }
 
   handleTouchMove(touchPosition) {
@@ -64,6 +73,7 @@ class Swipeable extends React.Component {
 
   handleTouchEnd() {
     this._resetState();
+    this.props.touchEnd();
   }
 
   _resetState() {
